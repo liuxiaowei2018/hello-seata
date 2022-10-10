@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @date 2022年10月10日 17:05
  * @Description
  */
-@FeignClient(name = "feign-account-service")
+@FeignClient(name = "feign-account-service", fallback = AccountServiceFeignClientFallBack.class)
 public interface AccountServiceFeignClient {
 
     @PostMapping("/account/reduce-balance")

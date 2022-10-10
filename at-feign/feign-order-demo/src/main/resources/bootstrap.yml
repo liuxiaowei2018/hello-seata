@@ -1,6 +1,10 @@
 server:
   port: 17081
 
+feign:
+  hystrix:
+    enabled: true
+
 spring:
   application:
     name: feign-order-service
