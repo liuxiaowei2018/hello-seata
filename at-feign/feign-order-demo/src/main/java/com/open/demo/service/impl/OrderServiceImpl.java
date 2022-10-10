@@ -46,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
         // 扣减余额
         accountService.reduceBalance(new AccountReduceBalanceDTO().setUserId(userId).setPrice(price));
         // 通过 accountService 服务的降级返回 手动回滚事务 假设返回false
+        // 若项目中被全局异常管理 需要 排查 feign包 通过指定 @ControllerAdvice(basePackages = "")
         if (false) {
             //手动回滚
             GlobalTransactionContext.reload(RootContext.getXID()).rollback();
