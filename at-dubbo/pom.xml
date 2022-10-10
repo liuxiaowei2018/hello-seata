@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>hello-seata</artifactId>
+        <groupId>com.open</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>dubbo-order-demo</module>
+        <module>dubbo-product-demo</module>
+        <module>dubbo-account-demo</module>
+        <module>dubbo-order-demo-api</module>
+        <module>dubbo-product-demo-api</module>
+        <module>dubbo-account-demo-api</module>
+    </modules>
+    <artifactId>at-dubbo</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+</project>

@@ -1,0 +1,54 @@
+server:
+  port: 19083
+
+spring:
+  application:
+    name: account-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata_account?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+# dubbo 配置项，对应 DubboConfigurationProperties 配置类
+dubbo:
+  # Dubbo 应用配置
+  application:
+    name: ${spring.application.name} # 应用名
+    # 关闭 dubbo 在线运维功能，该功能主要通过 telnet 方式进行服务的权重调整
+    qos-enable: false
+  # Dubbo 注册中心配
+  registry:
+    address: nacos://172.31.2.27:8848 # 注册中心地址。个鞥多注册中心，可见 http://dubbo.apache.org/zh-cn/docs/user/references/registry/introduction.html 文档。
+    # 修改 dubbo 在 nacos 上的命名空间
+    parameters[namespace]: dev
+    # 修改 dubbo 在 nacos 上的分组
+    group: at-dubbo
+  # Dubbo 服务提供者协议配置
+  protocol:
+    port: -1 # 协议端口。使用 -1 表示随机端口。
+    name: dubbo # 使用 `dubbo://` 协议。更多协议，可见 http://dubbo.apache.org/zh-cn/docs/user/references/protocol/introduction.html 文档
+  # 配置扫描 Dubbo 自定义的 @Service 注解，暴露成 Dubbo 服务提供者
+  scan:
+    base-packages: com.open.demo
+
+# Seata 配置项，对应 SeataProperties 类
+seata:
+  application-id: ${spring.application.name} # Seata 应用编号，默认为 ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group # Seata 事务组编号，用于 TC 集群名
+  # 服务配置项，对应 ServiceProperties 类
+  service:
+    # 虚拟组和分组的映射
+    vgroup-mapping:
+      account-service-group: default
+  # Seata 注册中心配置项，对应 RegistryProperties 类
+  registry:
+    type: nacos # 注册中心类型，默认为 file
+    nacos:
+      application: seata-server
+      group: SEATA_GROUP
+      username: nacos
+      password: 123456
+      cluster: default # 使用的 Seata 分组
+      namespace: dev # Nacos 命名空间
+      serverAddr: 172.31.2.27:8848 # Nacos 服务地址
