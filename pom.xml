@@ -18,6 +18,7 @@
         <module>at-httpclient</module>
         <module>at-dubbo</module>
         <module>at-feign</module>
+        <module>tcc-feign</module>
     </modules>
 
     <properties>
